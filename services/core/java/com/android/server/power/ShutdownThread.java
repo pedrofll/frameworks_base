@@ -272,8 +272,9 @@ public final class ShutdownThread extends Thread {
     }
 
     private static int getAdvancedReboot(Context context) {
-        return SlimSettings.Secure.getInt(context.getContentResolver(),
-                SlimSettings.Secure.ADVANCED_REBOOT, 0);
+          int def = BuildInfo.getSlimBuildType().equals(BuildInfo.BUILD_TYPE_UNOFFICIAL) ? 1 : 0;
+          return Settings.Secure.getInt(context.getContentResolver(),
+                  Settings.Secure.ADVANCED_REBOOT, 1);
     }
 
     private static class CloseDialogReceiver extends BroadcastReceiver
